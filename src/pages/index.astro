@@ -1,0 +1,100 @@
+---
+import BusinessCard from '../components/BusinessCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Layout from '../layouts/Layout.astro';
+import Text from '../components/Text.astro';
+import ztl from '../assets/ztl_logo.png'; 
+import medminder from '../assets/MedMinder.png'; 
+import qrious from '../assets/qrious.png'; 
+---
+
+<Layout title="Evan Kim">
+    <section class="full-page">
+        <div class="center-left">
+            <h1 class="no-margin">Hello World, I am <strong>Evan Kim</strong></h1>
+            <h2 class="no-margin">Software Developer</h2>
+        </div>
+        <div class="center-right">
+            <BusinessCard height=600 width=900/>
+        </div>
+    </section>
+    <section id="about" class="center half-page"> 
+        <Text title="About Me" description="Hi, My name is Evan Kim. I am a currently a high school student who has a great interest in everything computers. I like to learn as much as possible in all fields of computer science from low level languages to web apps to regular mobile apps. I am always willing to learn new technologies and adopt them. I always try to use something new on my own personal projects. On the side, I also enjoy aviation and hope to one day get my private pilot's license. I am also fluent in Spanish and also enjoy being outdoors." />
+    </section>
+    <section id="projects" class="center full-page">
+        <h1>My Projects</h1>
+        <div class="grid-container">
+            <ProjectCard title="MedMinder" description="To combat medication non-compliance, I was the lead developer of a team of 5 that built an app that uses Optical Character Recognition (OCR) technology to create an algrorithm to interpret prescription's directions and schedule notifications to remind you when to take medications and more. Finalist of the 5th annual Ready Set App competition. Sponsered by the NCBCE and Lenovo. Built with Flutter." image={medminder} alt="MedMinder" />
+            <ProjectCard title="QRious" description="I developed an app that analyzes QR codes to verify their integrity. Powered by a self-hosted KASM instance, the app enables the creation of virtualized web page instances. The app also allows users to preview websites without clicking on them through a custom screenshot API I built. Built with Flutter" image={qrious}alt="QRious" />
+            <ProjectCard title="ZTL ARTCC Website" description="I am on the web team of an open source website supporting the Atlanta ARTCC of VATUSA on VATSIM (Virtual Air Traffic Simulation Network). Built with Laravel" image={ztl} alt="ZTL Logo" />
+        </div>
+    </section>
+    <section id="contact" class="center full-page"> 
+        <Text title="Contact Me" description="Hi, My name is Evan Kim. I am a currently a high school student who has a great interest in everything computers. I like to learn as much as possible in all fields of computer science from low level languages to web apps to regular mobile apps. I am always willing to learn new technologies and adopt them. I always try to use something new on my own personal projects. On the side, I also enjoy aviation and hope to one day get my private pilot's license. I am also fluent in Spanish and also enjoy being outdoors." />
+    </section>
+</Layout>
+
+<style>
+.full-page {
+    height: 100vh;
+}
+
+.half-page {
+    height: 50vh;
+}
+
+.limited-width {
+    width: 50%;
+}
+
+.grid-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 25px;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.center-left {
+    margin: 0;
+    margin-left: 10%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.center-right {
+    margin: 0;
+    margin-left: 50%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.no-margin {
+    margin: 0;
+}
+
+h1 {
+    color: var(--light);
+    font-size: 50px;
+}
+
+h1 strong {
+    font-size: 60px;
+    font-weight: 800;
+}
+
+h2 {
+    color: var(--dim-gray);
+    font-size: 25px;
+}
+</style>
+
+

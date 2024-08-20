@@ -1,0 +1,22 @@
+{
+  "name": "portfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.2",
+    "@fontsource-variable/jetbrains-mono": "^5.0.21",
+    "astro": "^4.14.2",
+    "three": "^0.167.1",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/three": "^0.167.1"
+  }
+}

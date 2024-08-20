@@ -1,0 +1,52 @@
+---
+import BusinessCard from '../../components/BusinessCard.astro';
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="My Site">
+    <div class="center-left">
+        <h1>Hello World, I am <strong>Evan Kim</strong></h1>
+        <h2>Software Developer</h2>
+    </div>
+    <div class="center-right">
+        <BusinessCard height=600 width=900/>
+    </div>
+</Layout>
+
+<style>
+.center-left {
+    margin: 0;
+    margin-left: 10%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.center-right {
+    margin: 0;
+    margin-left: 50%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+h1 {
+    color: var(--light);
+    font-size: 50px;
+    margin: 0;
+}
+
+h1 strong {
+    font-size: 60px;
+    font-weight: 800;
+}
+
+h2 {
+    color: var(--dim-gray);
+    font-size: 25px;
+    margin: 0;
+}
+</style>
+
+

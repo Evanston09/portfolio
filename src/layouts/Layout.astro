@@ -1,0 +1,39 @@
+---
+import '@fontsource-variable/jetbrains-mono';
+// import Footer from '../components/Footer.astro'
+import NavBar from '../components/NavBar.astro'
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{title}</title>
+  </head>
+  <NavBar />
+  <body>
+    <slot />
+  </body>
+  <!-- <Footer /> -->
+</html>
+
+<style is:global>
+	:root {
+        --dim-gray: #6C6F7D;
+        --light: #FCFCFC;
+        --dark: #090909;
+        --pacific-cyan: #00B4D8;
+        --oxford-blue: #011936;
+        --midnight-blue: #0A2342;
+
+	}
+	html {
+        font-family: 'JetBrains Mono Variable', monospace;
+		background: var(--oxford-blue);
+        scroll-behavior: smooth;
+	}
+</style>

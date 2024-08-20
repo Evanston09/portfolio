@@ -1,0 +1,23 @@
+---
+const {title, description} = Astro.props;
+---
+
+<h1>{title}</h1>
+<div class="limited-width">
+    <p>{description}</p>
+</div>
+
+<style>
+    .limited-width {
+        max-width: 70vw;
+    }
+    h1 {
+        color: var(--light);
+        font-size: 50px;
+        margin: 0px;
+    }
+    p {
+        color: var(--dim-gray);
+        font-size: 20px;
+    }
+</style>
