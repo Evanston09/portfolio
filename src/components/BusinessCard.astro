@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // To optimize could only do it to the 2 main faces
         materials.forEach(material => {
             material.normalMap = normalTexture;
-            material.normalScale.set(5, 5);  // Adjust the scale as needed
+            material.normalScale.set(3, 3); 
         });
 
         const cube = new THREE.Mesh(geometry, materials);

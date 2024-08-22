@@ -1,14 +1,28 @@
 ---
+import { Image } from 'astro:assets';
+import github from '../assets/github-white.svg';
+import peaks from '../assets/peaks.svg';
 ---
- <footer>
-  <p>Author: Hege Refsnes</p>
-  <p><a href="mailto:hege@example.com">hege@example.com</a></p>
+ <footer class="footer">
+    <p>Made by Evan Kim with ❤️ using Astro and three.js</p>
+    <a href="https://gitea.ehkhome.duckdns.org/Evanston/portfolio" target="_blank">
+        <Image src={github} alt="github" height={30} />
+    </a>
 </footer>
 
+
 <style>
-footer { 
-    position: absolute; 
-    bottom: 0; 
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    height: 1%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background: var(--midnight-blue);
 }
 
 p {
