@@ -14,24 +14,22 @@ import rust from '../assets/rust-original.svg';
 ---
 
 <Layout title="Evan Kim">
-    <section class="full-page">
-        <div class="center-left">
+    <section class="split full-page">
+        <div>
             <h1 class="no-margin">Hello World, I am <strong>Evan Kim</strong></h1>
             <h2 class="no-margin">Software Developer</h2>
         </div>
-        <div class="center-right">
-            <BusinessCard height=600 width=900/>
-        </div>
+        <BusinessCard height=600px width=900/>
     </section>
-    <section id="about" class="center half-page"> 
-        <Text title="About Me" description="Hi, My name is Evan Kim. I am a currently a high school student who has a great interest in everything computers. I like to learn as much as possible in all fields of computer science from low level languages to web apps to regular mobile apps. I am always willing to learn new technologies and adopt them. I always try to use something new on my own personal projects. I particualy love open source projects. On the side, I also enjoy aviation and hope to one day get my private pilot's license. I am also fluent in Spanish and also enjoy being outdoors." />
+    <section id="about" class="center smaller-page"> 
+        <Text title="About Me" description="I'm Evan Kim, a high school student with a deep passion for all things related to computers. I love exploring various areas of computer science, from low-level programming languages to web and mobile app development. I'm always eager to learn and embrace new technologies, and I make it a point to incorporate something new into my personal projects. I particularly love open-source work. Outside of tech, I'm enthusiastic about aviation and aspire to earn my private pilot's license someday. I'm also fluent in Spanish and enjoy spending time outdoors." />
     </section>
-    <section id="projects" class="center test">
+    <section id="projects" class="center smaller-page">
         <h1>My Projects</h1>
         <div class="grid-container">
-            <ProjectCard title="MedMinder" description="To combat medication non-compliance, I was the lead developer of a team of 5 that built an app that uses Optical Character Recognition (OCR) technology to create an algrorithm to interpret prescription's directions and schedule notifications to remind you when to take medications and more. Finalist of the 5th annual Ready Set App competition. Sponsered by the NCBCE and Lenovo. Built with Flutter." image={medminder} alt="MedMinder" icon={flutter}/>
-            <ProjectCard title="Yag" description="I developed a custom API in rust to process medication that was submitted via the MedMinder app to handle additional features such as drug and food interactions as well as providing descriptions of medications. Built with Axum." image={yag} alt="Yag" icon={rust} />
-            <ProjectCard title="ZTL ARTCC Website" description="I am on the web team of an open source website supporting the Atlanta ARTCC of VATUSA on VATSIM (Virtual Air Traffic Simulation Network). Built with Laravel" image={ztl} alt="ZTL Logo" icon={laravel}/>
+            <ProjectCard title="MedMinder" description="To combat medication non-compliance, I was the lead developer of a team of 5 that built an app that uses Optical Character Recognition (OCR) technology to create an algrorithm to interpret prescription's directions and schedule notifications to remind you when to take medications and more. Finalist of the 5th annual Ready Set App competition. Sponsered by the NCBCE and Lenovo. Built with Flutter." image={medminder} alt="MedMinder" icon={flutter} readMore=true readMoreURL="https://devpost.com/software/medminder-bndvgt"/>
+            <ProjectCard title="ZTL ARTCC Website" description="I am on the web team of an open source website supporting the Atlanta ARTCC of VATUSA on VATSIM (Virtual Air Traffic Simulation Network). Built with Laravel" image={ztl} alt="ZTL Logo" icon={laravel} readMore=true readMoreURL="https://www.ztlartcc.org/"/>
+            <ProjectCard title="Yag" description="I developed a custom API in rust to process medication that was submitted via the MedMinder app to handle additional features such as drug and food interactions as well as providing descriptions of medications. Built with Axum and Rust." image={yag} alt="Yag" icon={rust}/>
         </div>
     </section>
     <section id="contact" class="full-page">
@@ -41,16 +39,12 @@ import rust from '../assets/rust-original.svg';
 </Layout>
 
 <style>
-/* Rename this later */
-.test {
-    height: 75vh
-}
 .full-page {
     height: 100vh;
 }
 
-.half-page {
-    height: 50vh;
+.smaller-page {
+    height: 75vh;
 }
 
 .limited-width {
@@ -90,20 +84,25 @@ import rust from '../assets/rust-original.svg';
 .no-margin {
     margin: 0;
 }
+.split {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
 
 h1 {
     color: var(--light);
-    font-size: 50px;
+    font-size: 3.125em;
 }
 
 h1 strong {
-    font-size: 60px;
+    font-size: 1.2em;
     font-weight: 800;
 }
 
 h2 {
     color: var(--dim-gray);
-    font-size: 25px;
+    font-size: 1.5625em;
 }
 </style>
 
