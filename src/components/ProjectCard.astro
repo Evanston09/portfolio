@@ -20,11 +20,11 @@ const { title, description, image, alt, icon, readMore, readMoreURL } = Astro.pr
 <style>
 h1 {
     color: var(--light);
-    font-size: 25px;
+    font-size: 1.563rem;
 }
 p {
     color: var(--dim-gray);
-    font-size: 15px;
+    font-size: .938rem;
     margin: 0px;
 }
 .card-content {
@@ -39,12 +39,14 @@ p {
 .card {
     display:flex;
     flex-direction: column;
-    width: 400px;
-    height: 750px;
+    max-width: 400px;
+    min-height: 775px;
+    justify-items: spacen-between;
     background: var(--midnight-blue);
     border-radius: 20px;
     transition: background 0.5s ease;
     position: relative;
+
 }
 
 .card-icon {
