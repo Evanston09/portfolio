@@ -2,21 +2,24 @@
 const { height, width } = Astro.props;
 ---
 
-<canvas id='card'></canvas>
+<canvas id='card' data-height={height} data-width={width}></canvas>
 
 <script>
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 // Look into this loading thing.
+// Hard to pass props directly into the canvas hence the data tags
 document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.querySelector('#card');
+    const canvas = document.getElementById('card');
     
-    // Used to make sure not null
+
+    // Used to make sure not null 
     if (canvas) {
         // Can not pass percentage directly into canvas
-        canvas.width = window.innerWidth * .5;
-        canvas.height = window.innerHeight * .75;
+        // Need a way to stop lsp from complaining so much about this
+        canvas.width = window.innerWidth * Number(canvas.dataset.width);
+        canvas.height = window.innerHeight * Number(canvas.dataset.height);
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
 
@@ -93,6 +96,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         window.addEventListener('scroll', rotateOnScroll);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth * Number(canvas.dataset.width);
+            canvas.height = window.innerHeight * Number(canvas.dataset.height);
+            //update camera
+            camera.aspect = canvas.clientWidth / canvas.clientWidth
+            camera.updateProjectionMatrix()
+            renderer.setSize(canvas.clientWidth, canvas.clientWidth)
+        })
 
 
         // renderer.render(scene, camera);
