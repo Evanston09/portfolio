@@ -13,18 +13,16 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('card');
     
-
     // Used to make sure not null 
     if (canvas) {
-        // Can not pass percentage directly into canvas
-        // Need a way to stop lsp from complaining so much about this
-        canvas.width = window.innerWidth * Number(canvas.dataset.width);
-        canvas.height = window.innerHeight * Number(canvas.dataset.height);
+        // Calculating inside of JS bc css dont like threejs this took like 3 days to figure out
+        const width = window.innerWidth * Number(canvas.dataset.width);
+        const height = window.innerHeight * Number(canvas.dataset.height);
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, canvas: canvas });
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setSize(width, height);
 
         const loader = new THREE.TextureLoader();
         function loadColorTexture( path: string ) {
@@ -98,12 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('scroll', rotateOnScroll);
 
         window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth * Number(canvas.dataset.width);
-            canvas.height = window.innerHeight * Number(canvas.dataset.height);
+            const width = window.innerWidth * Number(canvas.dataset.width);
+            const height = window.innerHeight * Number(canvas.dataset.height);
             //update camera
-            camera.aspect = canvas.clientWidth / canvas.clientWidth
+            renderer.setSize(width, height)
+            camera.aspect = width / height 
             camera.updateProjectionMatrix()
-            renderer.setSize(canvas.clientWidth, canvas.clientWidth)
         })
 
 
