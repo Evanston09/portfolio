@@ -10,104 +10,123 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
 // Look into this loading thing.
 // Hard to pass props directly into the canvas hence the data tags
-document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('card');
-    
-    // Used to make sure not null 
-    if (canvas) {
-        // Calculating inside of JS bc css dont like threejs this took like 3 days to figure out
+const canvas = document.getElementById('card');
+
+// Used to make sure not null and keep typescript happy
+if (canvas) {
+    // Calculating inside of JS bc css dont like threejs this took like 3 days to figure out
+    const width = window.innerWidth * Number(canvas.dataset.width);
+    const height = window.innerHeight * Number(canvas.dataset.height);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, canvas: canvas });
+    renderer.setSize(width, height);
+
+    const loader = new THREE.TextureLoader();
+    function loadColorTexture( path: string ) {
+        const texture = loader.load( path );
+        texture.colorSpace = THREE.SRGBColorSpace;
+        return texture;
+    }
+
+    const color = 0xFFFFFF;
+    const intensity = 10;
+    const light1 = new THREE.SpotLight(color, intensity);
+    light1.position.set(-1, 2, -4);
+    scene.add(light1);
+    scene.add(light1.target);
+
+    const light2 = new THREE.SpotLight(color, intensity);
+    light2.position.set(-1, 2, 4);
+    scene.add(light2);
+    scene.add(light2.target);
+
+    const ambientLight = new THREE.AmbientLight(0x404040, 50); 
+    scene.add(ambientLight);
+
+    const geometry = new THREE.BoxGeometry(5, 3, .01);
+    // const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF, shininess: 200});  
+    const normalTexture = loader.load('normal.jpg');
+
+    const materials: THREE.MeshStandardMaterial[] = [
+        new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
+        new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
+        new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
+        new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
+        new THREE.MeshStandardMaterial({ roughness: .8, metalness: .1, map: loadColorTexture('front.png') }),
+        new THREE.MeshStandardMaterial({ roughness: .8, metalness: .1, map: loadColorTexture('back.png') }),
+    ];
+    // To optimize could only do it to the 2 main faces
+    materials.forEach(material => {
+        material.normalMap = normalTexture;
+        material.normalScale.set(3, 3); 
+    });
+
+    const size = new THREE.Vector3(5, 3, .01);
+    const cube = new THREE.Mesh(geometry, materials);
+    scene.add(cube);
+
+
+    const controls = new OrbitControls( camera, renderer.domElement );
+    controls.autoRotate = true;
+    controls.enableDamping = true;
+    controls.enableZoom = false;
+    controls.enablePan = false;
+
+    fitCameraToObject(size, camera, 2);
+
+    function fitCameraToObject(size: THREE.Vector3, camera: THREE.PerspectiveCamera, offset: number) {
+        offset = offset || 1.25;
+        // Dont really get how the math works but it works...
+        // No need for bounding box bc its just a rectangle
+        // get the max side of the bounding box (fits to width OR height as needed )
+        const fov = camera.fov * ( Math.PI / 180 );
+        const fovh = 2*Math.atan(Math.tan(fov/2) * camera.aspect);
+        let dx = size.z / 2 + Math.abs( size.x / 2 / Math.tan( fovh / 2 ) );
+        let dy = size.z / 2 + Math.abs( size.y / 2 / Math.tan( fov / 2 ) );
+        let cameraZ = Math.max(dx, dy);
+
+        cameraZ *= offset; 
+
+        camera.position.set(0, 0, cameraZ);
+
+        // Make sure it is within cutoff distance
+        camera.far = cameraZ * 3;
+        camera.updateProjectionMatrix();
+    }
+
+    function rotateOnScroll() {
+        const scrollY = window.scrollY;
+        cube.rotation.y = scrollY * 0.005;
+    }
+
+    function start() {
+
+        requestAnimationFrame( start );
+
+        controls.update();
+
+        renderer.render( scene, camera );
+
+    }
+
+    start();
+
+
+
+    window.addEventListener('scroll', rotateOnScroll);
+
+    window.addEventListener('resize', () => {
         const width = window.innerWidth * Number(canvas.dataset.width);
         const height = window.innerHeight * Number(canvas.dataset.height);
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, canvas: canvas });
-        renderer.setSize(width, height);
-
-        const loader = new THREE.TextureLoader();
-        function loadColorTexture( path: string ) {
-            const texture = loader.load( path );
-            texture.colorSpace = THREE.SRGBColorSpace;
-            return texture;
-        }
-
-        
-        const color = 0xFFFFFF;
-        const intensity = 10;
-        const light = new THREE.SpotLight(color, intensity);
-        light.position.set(-1, 2, 4);
-        scene.add(light);
-        scene.add(light.target);
-
-        const light1 = new THREE.SpotLight(color, intensity);
-        light1.position.set(-1, 2, -4);
-        scene.add(light1);
-        scene.add(light1.target);
-
-        const ambientLight = new THREE.AmbientLight(0x404040, 50); 
-        scene.add(ambientLight);
-
-        const geometry = new THREE.BoxGeometry(5, 3, .01);
-        // const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF, shininess: 200});  
-        const normalTexture = loader.load('normal.jpg');
-        
-        const materials: THREE.MeshStandardMaterial[] = [
-            new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
-            new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
-            new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
-            new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
-            new THREE.MeshStandardMaterial({ roughness: .8, metalness: .1, map: loadColorTexture('front.png') }),
-            new THREE.MeshStandardMaterial({ roughness: .8, metalness: .1, map: loadColorTexture('back.png') }),
-        ];
-
-        // To optimize could only do it to the 2 main faces
-        materials.forEach(material => {
-            material.normalMap = normalTexture;
-            material.normalScale.set(3, 3); 
-        });
-
-        const cube = new THREE.Mesh(geometry, materials);
-        scene.add(cube);
-
-        camera.position.z = 4.75;
-
-        const controls = new OrbitControls( camera, renderer.domElement );
-        controls.autoRotate = true;
-        controls.enableDamping = true;
-        controls.enableZoom = false;
-        controls.enablePan = false;
-
-        function start() {
-
-            requestAnimationFrame( start );
-
-            controls.update();
-
-            renderer.render( scene, camera );
-
-        }
-        start();
-
-        function rotateOnScroll() {
-            const scrollY = window.scrollY;
-            cube.rotation.y = scrollY * 0.005;
-        }
-
-        window.addEventListener('scroll', rotateOnScroll);
-
-        window.addEventListener('resize', () => {
-            const width = window.innerWidth * Number(canvas.dataset.width);
-            const height = window.innerHeight * Number(canvas.dataset.height);
-            //update camera
-            renderer.setSize(width, height)
-            camera.aspect = width / height 
-            camera.updateProjectionMatrix()
-        })
-
-
-        // renderer.render(scene, camera);
-    } else {
-        console.error('Canvas element not found');
-    }
-});
+        //update camera
+        renderer.setSize(width, height)
+        camera.aspect = width / height 
+        camera.updateProjectionMatrix()
+        fitCameraToObject(size, camera, 2);
+    })
+} else {
+    console.error('Canvas element not found');
+}
 </script>
