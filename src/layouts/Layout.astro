@@ -1,7 +1,7 @@
 ---
 import '@fontsource-variable/jetbrains-mono';
 // import Footer from '../components/Footer.astro'
-import NavBar from '../components/NavBar.astro'
+import NavBar from '@components/NavBar.astro'
 
 const { title } = Astro.props;
 ---
@@ -10,6 +10,7 @@ const { title } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Evan Kim's portfolio website.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{title}</title>
@@ -22,9 +23,13 @@ const { title } = Astro.props;
 
 <style is:global>
 	:root {
-        --dim-gray: #6C6F7D;
+        /* --dim-gray: #6C6F7D; */
+        /* --dim-gray: #778899; */
+        /* --dim-gray: #808a9f; */
+        --subheading-1: #84828F;
+        --subheading-2: #888599;
         --light: #FCFCFC;
-        --dark: #090909;
+        --dark: #607D8B;
         --pacific-cyan: #00B4D8;
         --oxford-blue: #011936;
         --midnight-blue: #061E3C;

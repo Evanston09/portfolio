@@ -1,19 +1,22 @@
 ---
+import peaks from '@assets/peaks.svg';
 ---
 <div class="contact">
     <form name="contact" method="POST" data-netlify="true">
         <h1>Contact Me</h1>
+            <!-- The name attrubute is for Netlify -->
             <label for="name">Name:</label>
-            <input type="text" name="name" />
+            <input type="text" name="name" id="name"/>
             <label for="email">Email:</label>
-            <input type="email" name="email" />
+            <input type="email" name="email" id="email"/>
             <label for="message">Message:</label>
-            <textarea name="message"></textarea>
+            <textarea name="message" id="message"></textarea>
             <button type="submit">Send</button>
     </form>
 
 </div>
-<style>
+
+<style define:vars={{ peaks:`url(${peaks.src})` }}>
 form {
     background-color: rgba(6, 30, 60, .6);
     padding: 20px;
@@ -27,10 +30,8 @@ form {
     margin: 100px;
 }
 .contact {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 900/300;
-    background-image: url(peaks.svg);
+    /* background-image: url('/peaks.svg'); */
+    background-image: var(--peaks);
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
@@ -68,6 +69,7 @@ input {
     color: var(--light);
     font-size: 1rem;
 }
+
 textarea {
     background: none;
     margin-top: 10px;
@@ -83,7 +85,7 @@ textarea {
 }
 
 button {
-    background: var(--midnight-blue-hover);
+    background: var(--oxford-blue);
     color: var(--light);
     border: none;
     border-radius: 5px;
@@ -92,6 +94,10 @@ button {
     margin-top: 10px;
     cursor: pointer;
     font-size: 1.3rem;
+    transition: background 0.3s ease; 
 }
 
+button:hover {
+    background: var(--midnight-blue);
+}
 </style>

@@ -1,29 +1,59 @@
 ---
-const { height, width } = Astro.props;
+const { height, width, small_height, small_width} = Astro.props;
+import front from '../assets/card/front.png'
+import back from '../assets/card/back.png'
+import normal from '../assets/card/normal.jpg'
 ---
 
-<canvas id='card' data-height={height} data-width={width}></canvas>
+<div id="loading-container" class="loading">
+    <label for="loading">Loading...</label>
+    <progress id="loading" max="100" value="0">0%</progress>
+</div>
+
+<canvas id='card' data-height={height} data-width={width} data-small_height={small_height} data-small_width={small_width} data-front={front.src} data-back={back.src} data-normal={normal.src}></canvas>
 
 <script>
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 
-// Look into this loading thing.
-// Hard to pass props directly into the canvas hence the data tags
 const canvas = document.getElementById('card');
+const loading = document.getElementById("loading");
+const loadingContainer = document.getElementById("loading-container");
 
 // Used to make sure not null and keep typescript happy
-if (canvas) {
+if (canvas && loading && loadingContainer) {
+    // cant pass imports if trying to define vars in script tag meaning i have to use data tags 
+    // https://stackoverflow.com/questions/76714410/how-to-pass-variable-from-frontmatter-to-script-in-astro-js
+    // Alternative?
+    // https://github.com/withastro/astro/issues/6642
+    let widthMultiplier = Number(canvas.dataset.width);
+    let heightMultiplier = Number(canvas.dataset.height);
+    let smallWidthMultiplier = Number(canvas.dataset.small_width);
+    let smallHeightMultiplier = Number(canvas.dataset.small_height);
+
     // Calculating inside of JS bc css dont like threejs this took like 3 days to figure out
-    const width = window.innerWidth * Number(canvas.dataset.width);
-    const height = window.innerHeight * Number(canvas.dataset.height);
+    const [width, height] = calculateDimensions()
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, canvas: canvas });
     renderer.setSize(width, height);
 
-    const loader = new THREE.TextureLoader();
+    const loadingManager = new THREE.LoadingManager();
+
+    loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+        const progress = itemsLoaded / itemsTotal * 100;
+        loading.value = progress
+        loading.innerHTML = `${progress}%`
+    }
+
+    loadingManager.onLoad = () => {
+        loadingContainer.style.display = 'none';
+        canvas.style.display = 'inline';
+    }
+       
+
+    const loader = new THREE.TextureLoader(loadingManager);
     function loadColorTexture( path: string ) {
         const texture = loader.load( path );
         texture.colorSpace = THREE.SRGBColorSpace;
@@ -45,28 +75,27 @@ if (canvas) {
     const ambientLight = new THREE.AmbientLight(0x404040, 50); 
     scene.add(ambientLight);
 
+    const size = new THREE.Vector3(5, 3, .01);
     const geometry = new THREE.BoxGeometry(5, 3, .01);
-    // const material = new THREE.MeshPhongMaterial({color: 0xFFFFFF, shininess: 200});  
-    const normalTexture = loader.load('normal.jpg');
+    const normalTexture = loader.load(canvas.dataset.normal!);
 
     const materials: THREE.MeshStandardMaterial[] = [
         new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
         new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
         new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
         new THREE.MeshStandardMaterial({ color: 0xFFFFFF, roughness: .8, metalness: .1}),
-        new THREE.MeshStandardMaterial({ roughness: .8, metalness: .1, map: loadColorTexture('front.png') }),
-        new THREE.MeshStandardMaterial({ roughness: .8, metalness: .1, map: loadColorTexture('back.png') }),
+        new THREE.MeshStandardMaterial({ roughness: .8, map: loadColorTexture(canvas.dataset.front!) }),
+        new THREE.MeshStandardMaterial({ roughness: .8, map: loadColorTexture(canvas.dataset.back!) }),
     ];
+
     // To optimize could only do it to the 2 main faces
     materials.forEach(material => {
         material.normalMap = normalTexture;
         material.normalScale.set(3, 3); 
     });
 
-    const size = new THREE.Vector3(5, 3, .01);
     const cube = new THREE.Mesh(geometry, materials);
     scene.add(cube);
-
 
     const controls = new OrbitControls( camera, renderer.domElement );
     controls.autoRotate = true;
@@ -81,6 +110,7 @@ if (canvas) {
         // Dont really get how the math works but it works...
         // No need for bounding box bc its just a rectangle
         // get the max side of the bounding box (fits to width OR height as needed )
+        // https://wejn.org/2020/12/cracking-the-threejs-object-fitting-nut/#
         const fov = camera.fov * ( Math.PI / 180 );
         const fovh = 2*Math.atan(Math.tan(fov/2) * camera.aspect);
         let dx = size.z / 2 + Math.abs( size.x / 2 / Math.tan( fovh / 2 ) );
@@ -101,32 +131,71 @@ if (canvas) {
         cube.rotation.y = scrollY * 0.005;
     }
 
-    function start() {
-
-        requestAnimationFrame( start );
-
-        controls.update();
-
-        renderer.render( scene, camera );
-
+    function calculateDimensions() {
+        // const width = window.innerWidth * Number(canvas!.dataset.width);
+        // const height = window.innerHeight * Number(canvas!.dataset.height);
+        let width;
+        let height;
+        if (window.matchMedia("(max-width: 768px)").matches) {
+            width = window.innerWidth * smallWidthMultiplier;
+            height = window.innerHeight * smallHeightMultiplier;
+        } else {
+            // Apply adjustments for larger screens
+            width = window.innerWidth * widthMultiplier;
+            height = window.innerHeight * heightMultiplier;
+        }
+        return [width, height];
     }
 
-    start();
-
-
-
-    window.addEventListener('scroll', rotateOnScroll);
-
-    window.addEventListener('resize', () => {
-        const width = window.innerWidth * Number(canvas.dataset.width);
-        const height = window.innerHeight * Number(canvas.dataset.height);
+    function resizeRendererToDisplaySize() {
+        const [width, height] = calculateDimensions()
         //update camera
         renderer.setSize(width, height)
         camera.aspect = width / height 
         camera.updateProjectionMatrix()
         fitCameraToObject(size, camera, 2);
-    })
+    }
+
+    function start() {
+        requestAnimationFrame( start );
+        controls.update();
+        renderer.render( scene, camera );
+    }
+
+    start();
+
+    window.addEventListener('scroll', rotateOnScroll);
+
+    window.addEventListener('resize', resizeRendererToDisplaySize);
 } else {
     console.error('Canvas element not found');
 }
 </script>
+
+<style>
+.loading {
+    height: 80vh;
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+@media (max-width: 768px) {
+    .loading {
+        height: 50vh;
+        width: 100vw;
+    }
+}
+label {
+    color: var(--light);
+}
+#card {
+    display: none;
+}
+progress {
+  width: 50%;
+  height: 10px;
+}
+</style>

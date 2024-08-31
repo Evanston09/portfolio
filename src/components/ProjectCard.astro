@@ -1,9 +1,8 @@
 ---
 import { Image } from 'astro:assets';
-import arrow from '../svg/arrow.svg';
 
 // Use this differnet prop method later
-const { title, description, image, alt, icon, readMore, readMoreURL } = Astro.props;
+const { title, description, image, alt, icon, readMore, readMoreURL, readMoreText } = Astro.props;
 ---
 
 <div class="card">
@@ -15,7 +14,7 @@ const { title, description, image, alt, icon, readMore, readMoreURL } = Astro.pr
     <div>
         <Image class="card-icon" src={icon} alt="icon" />
     </div>
-    {readMore && <a class="card-button" href={readMoreURL} target="_blank">Read More</a>}
+    {readMore && <a class="card-button" href={readMoreURL} target="_blank">{readMoreText}</a>}
 </div>
 <style>
 h1 {
@@ -23,10 +22,11 @@ h1 {
     font-size: 1.563rem;
 }
 p {
-    color: var(--dim-gray);
+    color: var(--subheading-2);
     font-size: .938rem;
     margin: 0px;
 }
+
 .card-content {
     padding-left: 15px;
     padding-right: 15px;
