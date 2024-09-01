@@ -1,7 +1,7 @@
 ---
 import BusinessCard from '@components/BusinessCard.astro';
 import ProjectCard from '@components/ProjectCard.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro';
 import Text from '@components/Text.astro';
 import Footer from '@components/Footer.astro';
 import Contact from '@components/Contact.astro';
@@ -16,7 +16,7 @@ import rust from '@assets/icons/rust-original.svg';
 <Layout title="Evan Kim">
     <section class="split full-page">
         <div>
-            <h1 class="no-margin">Hello World, I am <strong>Evan Kim</strong></h1>
+            <h1 class="no-margin">Hello World, I am <br class="mobile-break"><strong>Evan Kim</strong></h1>
             <h2 class="no-margin">Software Developer</h2>
         </div>
         <BusinessCard height=".8" width=".5" small_height=".5" small_width="1"/>
@@ -64,8 +64,8 @@ import rust from '@assets/icons/rust-original.svg';
 
 .split {
     display: flex;
-    justify-content: space-around;
     align-items: center;
+    justify-content: space-evenly;
 }
 @media (max-width: 768px) {
     .split {
@@ -75,6 +75,16 @@ import rust from '@assets/icons/rust-original.svg';
 
 .no-margin {
     margin: 0;
+}
+
+.mobile-break {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-break {
+        display: block;
+    }
 }
 
 h1 {
