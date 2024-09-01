@@ -1,43 +1,43 @@
 ---
-import '@fontsource-variable/jetbrains-mono';
-import NavBar from '@components/NavBar.astro'
+import "@fontsource-variable/jetbrains-mono";
+import NavBar from "@components/NavBar.astro";
 
 const { title } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Evan Kim's portfolio website.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="description" content="Evan Kim's portfolio website." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{title}</title>
   </head>
   <NavBar />
   <body>
     <slot />
   </body>
-</html>
 
-<style is:global>
-	:root {
-        --subheading-1: #84828F;
-        --subheading-2: #888599;
-        --light: #FCFCFC;
-        --dark: #607D8B;
-        --pacific-cyan: #00B4D8;
-        --oxford-blue: #011936;
-        --midnight-blue: #061E3C;
-        --midnight-blue-hover: #0A2342;
-
-	}
-	html {
-        font-family: 'JetBrains Mono Variable', monospace;
-		background: var(--oxford-blue);
-        scroll-behavior: smooth;
-	}
-    body {
-        margin: 0;
+  <style is:global>
+    :root {
+      --subheading-1: #84828f;
+      --subheading-2: #888599;
+      --light: #fcfcfc;
+      --dark: #607d8b;
+      --pacific-cyan: #00b4d8;
+      --oxford-blue: #011936;
+      --midnight-blue: #061e3c;
+      --midnight-blue-hover: #0a2342;
     }
-</style>
+    html {
+      font-family: "JetBrains Mono Variable", monospace;
+      background: var(--oxford-blue);
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+    }
+  </style>
+
+</html>

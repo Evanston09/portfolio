@@ -1,105 +1,133 @@
 ---
-import BusinessCard from '@components/BusinessCard.astro';
-import ProjectCard from '@components/ProjectCard.astro';
-import Layout from '@layouts/Layout.astro';
-import Text from '@components/Text.astro';
-import Footer from '@components/Footer.astro';
-import Contact from '@components/Contact.astro';
-import ztl from '@assets/logos/ztl_logo.png'; 
-import medminder from '@assets/logos/MedMinder.png'; 
-import yag from '@assets/logos/yag.png'; 
-import flutter from '@assets/icons/flutter-original.svg';
-import laravel from '@assets/icons/laravel-original.svg';
-import rust from '@assets/icons/rust-original.svg';
+import BusinessCard from "@components/BusinessCard.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import Layout from "@layouts/Layout.astro";
+import Text from "@components/Text.astro";
+import Footer from "@components/Footer.astro";
+import Contact from "@components/Contact.astro";
+import ztl from "@assets/logos/ztl_logo.png";
+import medminder from "@assets/logos/MedMinder.png";
+import yag from "@assets/logos/yag.png";
+import flutter from "@assets/icons/flutter-original.svg";
+import laravel from "@assets/icons/laravel-original.svg";
+import rust from "@assets/icons/rust-original.svg";
 ---
 
 <Layout title="Evan Kim">
-    <section class="split full-page">
-        <div>
-            <h1 class="no-margin">Hello World, I am <br class="mobile-break"><strong>Evan Kim</strong></h1>
-            <h2 class="no-margin">Software Developer</h2>
-        </div>
-        <BusinessCard height=".8" width=".5" small_height=".5" small_width="1"/>
-    </section>
-    <section id="about" class="center smaller-page"> 
-        <Text title="About Me" description="I'm Evan Kim, a high school student with a deep passion for all things related to computers. I love exploring various areas of computer science, from low-level programming languages to web and mobile app development. I'm always eager to learn and embrace new technologies, and I make it a point to incorporate something new into my personal projects. I particularly love open-source work. Outside of tech, I'm enthusiastic about aviation and aspire to earn my private pilot's license someday. I'm also fluent in Spanish and enjoy spending time outdoors." />
-    </section>
-    <section id="projects" class="center smaller-page">
-        <h1>My Projects</h1>
-        <div class="grid-container">
-            <ProjectCard title="MedMinder" description="To combat medication non-compliance, I was the lead developer of a team of 5 that built an app that uses Optical Character Recognition (OCR) technology to create an algrorithm to interpret prescription's directions and schedule notifications to remind you when to take medications and more. Finalist of the 5th annual Ready Set App competition. Sponsered by the NCBCE and Lenovo. Built with Flutter." image={medminder} alt="MedMinder" icon={flutter} readMore=true readMoreURL="https://devpost.com/software/medminder-bndvgt" readMoreText="Competition Page"/>
-            <ProjectCard title="ZTL ARTCC Website" description="I am on the web team of an open source website supporting the Atlanta ARTCC of VATUSA on VATSIM (Virtual Air Traffic Simulation Network). Built with Laravel" image={ztl} alt="ZTL Logo" icon={laravel} readMore=true readMoreURL="https://www.ztlartcc.org/" readMoreText="View Website"/>
-            <ProjectCard title="Yag" description="I developed a custom API in rust to process medication that was submitted via the MedMinder app to handle additional features such as drug and food interactions as well as providing descriptions of medications. Built with Axum and Rust." image={yag} alt="Yag" icon={rust}/>
-        </div>
-    </section>
-    <section id="contact">
-        <Contact />
-    </section>
-    <Footer />
+  <section class="split full-page">
+    <div>
+      <h1 class="no-margin">
+        Hello World, I am <br class="mobile-break" /><strong>Evan Kim</strong>
+      </h1>
+      <h2 class="no-margin">Software Developer</h2>
+    </div>
+    <BusinessCard height=".8" width=".5" small_height=".5" small_width="1" />
+  </section>
+  <section id="about" class="center smaller-page">
+    <Text
+      title="About Me"
+      description="I'm Evan Kim, a high school student with a deep passion for all things related to computers. I love exploring various areas of computer science, from low-level programming languages to web and mobile app development. I'm always eager to learn and embrace new technologies, and I make it a point to incorporate something new into my personal projects. I particularly love open-source work. Outside of tech, I'm enthusiastic about aviation and aspire to earn my private pilot's license someday. I'm also fluent in Spanish and enjoy spending time outdoors."
+    />
+  </section>
+  <section id="projects" class="center smaller-page">
+    <h1>My Projects</h1>
+    <div class="grid-container">
+      <ProjectCard
+        title="MedMinder"
+        description="To combat medication non-compliance, I was the lead developer of a team of 5 that built an app that uses Optical Character Recognition (OCR) technology to create an algrorithm to interpret prescription's directions and schedule notifications to remind you when to take medications and more. Finalist of the 5th annual Ready Set App competition. Sponsered by the NCBCE and Lenovo. Built with Flutter."
+        image={medminder}
+        alt="MedMinder"
+        icon={flutter}
+        readMore="true"
+        readMoreURL="https://devpost.com/software/medminder-bndvgt"
+        readMoreText="Competition Page"
+      />
+      <ProjectCard
+        title="ZTL ARTCC Website"
+        description="I’m part of the web team for an open-source website that supports the Atlanta ARTCC (Air Route Traffic Control Center) of VATUSA on the VATSIM (Virtual Air Traffic Simulation Network) platform. Built with Laravel."
+        image={ztl}
+        alt="ZTL Logo"
+        icon={laravel}
+        readMore="true"
+        readMoreURL="https://www.ztlartcc.org/"
+        readMoreText="View Website"
+      />
+      <ProjectCard
+        title="Yag"
+        description="I developed a custom API to enhance the MedMinder app by processing medication data to offer advanced features such as drug and food interactions, as well as detailed medication descriptions. Built with Axum and Rust."
+        image={yag}
+        alt="Yag"
+        icon={rust}
+      />
+    </div>
+  </section>
+  <section id="contact">
+    <Contact />
+  </section>
+  <Footer />
 </Layout>
 
 <style>
-.full-page {
+  .full-page {
     min-height: 100vh;
-}
+  }
 
-.smaller-page {
+  .smaller-page {
     min-height: 75vh;
-}
+  }
 
-.grid-container {
+  .grid-container {
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
     gap: 25px;
     flex-wrap: wrap;
-}
+  }
 
-.center {
+  .center {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
+  }
 
-.split {
+  .split {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-}
-@media (max-width: 768px) {
+  }
+  @media (max-width: 768px) {
     .split {
-        flex-direction: column;
+      flex-direction: column;
     }
-}
+  }
 
-.no-margin {
+  .no-margin {
     margin: 0;
-}
+  }
 
-.mobile-break {
+  .mobile-break {
     display: none;
-}
+  }
 
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     .mobile-break {
-        display: block;
+      display: block;
     }
-}
+  }
 
-h1 {
+  h1 {
     color: var(--light);
     font-size: 3.125rem;
-}
+  }
 
-h1 strong {
+  h1 strong {
     font-size: 3.75rem;
     font-weight: 800;
-}
+  }
 
-h2 {
+  h2 {
     color: var(--subheading-1);
     font-size: 1.5625rem;
-}
+  }
 </style>
-

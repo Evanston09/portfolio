@@ -1,34 +1,31 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Footer from '@components/Footer.astro';
+import Layout from "@layouts/Layout.astro";
+import Footer from "@components/Footer.astro";
 ---
 
 <Layout title="Evan Kim">
-    <div class="center">
-        <h1>404</h1>
-        <a href="/">Go home?</a>
-    </div>
+  <div class="center">
+    <h1>404</h1>
+    <a href="/">Go home?</a>
+  </div>
 </Layout>
-<Footer />
 <style>
-a {
+  a {
     color: var(--light);
     cursor: pointer;
     font-size: 1.5rem;
-    text-decoration: none;
-}
+  }
 
-.center{
-    height: 87vh;
+  .center {
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-h1 {
+  }
+  h1 {
     color: var(--light);
     font-size: 10rem;
     margin: 0;
-}
+  }
 </style>
-
