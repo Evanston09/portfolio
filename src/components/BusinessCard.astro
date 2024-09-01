@@ -25,7 +25,7 @@ import normal from "../assets/card/normal.jpg";
   import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
   const canvas = document.getElementById("card");
-  const loading = document.getElementById("loading");
+  const loading = document.getElementById("loading") as HTMLProgressElement;
   const loadingContainer = document.getElementById("loading-container");
 
   // Used to make sure not null and keep typescript happy
@@ -53,7 +53,7 @@ import normal from "../assets/card/normal.jpg";
 
     const loadingManager = new THREE.LoadingManager();
 
-    loadingManager.onProgress = (url, itemsLoaded, itemsTotal) => {
+    loadingManager.onProgress = (_, itemsLoaded, itemsTotal) => {
       const progress = (itemsLoaded / itemsTotal) * 100;
       loading.value = progress;
       loading.innerHTML = `${progress}%`;
