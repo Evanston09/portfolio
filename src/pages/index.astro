@@ -99,10 +99,14 @@ import rust from "@assets/icons/rust-original.svg";
   @media (max-width: 768px) {
     .split {
       flex-direction: column;
+      justify-content: flex-start;
     }
     .title {
       width: 100vw;
       text-align: left;
+    }
+    .mobile-break {
+      display: block;
     }
   }
 
@@ -112,12 +116,6 @@ import rust from "@assets/icons/rust-original.svg";
 
   .mobile-break {
     display: none;
-  }
-
-  @media (max-width: 768px) {
-    .mobile-break {
-      display: block;
-    }
   }
 
   h1 {
