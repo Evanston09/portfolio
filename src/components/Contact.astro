@@ -3,49 +3,67 @@ import peaks from "@assets/peaks.svg";
 ---
 
 <div class="contact">
-  <form name="contact" method="POST" data-netlify="true">
-    <h1>Contact Me</h1>
-    <!-- The name attrubute is for Netlify -->
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" />
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" />
-    <label for="message">Message:</label>
-    <textarea name="message" id="message"></textarea>
-    <button type="submit">Send</button>
-  </form>
+    <div class="contact-inner">
+        <div class="contact-form">
+            <h1>Contact Me</h1>
+            <form name="contact" method="POST" data-netlify="true">
+                <!-- The name attrubute is for Netlify -->
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" required/>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required/>
+                <label for="message">Message:</label>
+                <textarea name="message" id="message" rows="15" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+            <div id="success" class="success">
+                <h2>Thank You!</h2>
+                <p>Your message has been sent successfully.<br>You can send another form in 10 seconds.<br>Access it <span id="quick" class="quick">now</span>.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style define:vars={{ peaks: `url(${peaks.src})` }}>
-  form {
+.success {
+    display: none;
+}
+.contact-inner {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 90vw; 
+    margin:auto;
+}
+.contact-form {
     background-color: rgba(6, 30, 60, 0.6);
-    padding: 20px;
+    padding: 1rem 1.5rem;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    max-width: 400px;
-    min-height: 600px;
-    margin: 100px;
+    max-width: 100%;
+    width: 25rem;
   }
   .contact {
     background-image: var(--peaks);
     background-size: cover;
     background-position: bottom;
     background-repeat: no-repeat;
-    display: flex;
-    flex-direction: row-reverse;
+    margin-top: 8rem;
   }
 
   @media (max-width: 1000px) {
-    form {
-      width: 100%;
-      margin: 15px auto;
-      padding: 10px;
+    .contact-inner {
+        justify-content: center;
+        width: 100%;
     }
   }
 
+.quick {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   label {
     color: var(--light);
     text-align: left;
@@ -57,6 +75,13 @@ import peaks from "@assets/peaks.svg";
     text-align: center;
     color: var(--light);
   }
+  h2 {
+    color: var(--light);
+  }
+p {
+    color: var(--light);
+
+}
   input {
     background: none;
     margin-top: 10px;
@@ -73,11 +98,10 @@ import peaks from "@assets/peaks.svg";
     background: none;
     margin-top: 10px;
     width: 100%;
-    height: 50%;
+    box-sizing: border-box;
     border-radius: 2px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     padding: 0.3rem;
-    box-sizing: border-box;
     resize: none;
     color: var(--light);
     font-size: 1rem;
@@ -100,3 +124,42 @@ import peaks from "@assets/peaks.svg";
     background: var(--midnight-blue);
   }
 </style>
+<script>
+const form = document.querySelector("form");
+const success = document.getElementById("success");
+const now = document.getElementById("quick");
+if (form && success && now) {
+    function hideSuccess() {
+        form!.style.display = "block";
+        success!.style.display = "none";
+    }
+    function showSuccess() {
+        form!.style.display = "none";
+        success!.style.display = "block";
+    }
+    const handleSubmit = (event: Event) => {
+        event.preventDefault();
+
+        const myForm = event.currentTarget as HTMLFormElement;
+        const formData = new FormData(myForm);
+
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData as any).toString(),
+        })
+            .then(() => {
+                showSuccess();
+                setTimeout(() => {
+                    hideSuccess();
+                }, 10000);
+            })
+            .catch((error) => alert(error));
+    };
+
+    form.addEventListener("submit", handleSubmit);
+    now.addEventListener("click", () => {
+        hideSuccess();
+    });
+}
+</script>
