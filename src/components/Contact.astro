@@ -16,6 +16,7 @@ import peaks from "@assets/peaks.svg";
         <textarea name="message" id="message" rows="15" required></textarea>
         <button type="submit">Send</button>
       </form>
+      <p class="ps">P.S. For privacy, you can find me on <a href="https://matrix.to/#/@evanston:evankim.me">Matrix</a>.</p>
       <div id="success" class="success">
         <h2>Thank You!</h2>
         <p>
@@ -30,6 +31,9 @@ import peaks from "@assets/peaks.svg";
 </div>
 
 <style define:vars={{ peaks: `url(${peaks.src})` }}>
+  .ps {
+    font-size: .9rem;
+  }
   .success {
     display: none;
   }
@@ -84,6 +88,9 @@ import peaks from "@assets/peaks.svg";
     color: var(--light);
   }
   p {
+    color: var(--light);
+  }
+  a {
     color: var(--light);
   }
   input {
