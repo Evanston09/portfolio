@@ -17,7 +17,7 @@ const { matrix } = Astro.props;
         <textarea name="message" id="message" rows="15" required></textarea>
         <button type="submit">Send</button>
       </form>
-      <p class="ps">
+      <p id="matrix"class="ps">
         P.S. For privacy, you can find me on <a href={matrix} target="_blank"
           >Matrix</a
         >.
@@ -142,15 +142,18 @@ const { matrix } = Astro.props;
 </style>
 <script>
   const form = document.querySelector("form");
+  const matrix = document.getElementById("matrix");
   const success = document.getElementById("success");
   const now = document.getElementById("quick");
-  if (form && success && now) {
+  if (form && success && now && matrix) {
     function hideSuccess() {
       form!.style.display = "block";
+      matrix!.style.display = "block";
       success!.style.display = "none";
     }
     function showSuccess() {
       form!.style.display = "none";
+      matrix!.style.display = "none";
       success!.style.display = "block";
     }
     const handleSubmit = (event: Event) => {
