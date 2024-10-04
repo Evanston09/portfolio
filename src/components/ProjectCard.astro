@@ -20,16 +20,17 @@ const {
     <h1>{title}</h1>
     <p>{description}</p>
   </div>
-  <div>
-    <Image class="card-icon" src={icon} alt="icon" />
+
+  <div class="card-footer">
+    <Image class="card-icon" src={icon} alt="icon" height={30} width={30} />
+    {
+      readMore && (
+        <a class="card-button" href={readMoreURL} target="_blank">
+          {readMoreText}
+        </a>
+      )
+    }
   </div>
-  {
-    readMore && (
-      <a class="card-button" href={readMoreURL} target="_blank">
-        {readMoreText}
-      </a>
-    )
-  }
 </div>
 <style>
   h1 {
@@ -58,21 +59,17 @@ const {
     background: var(--midnight-blue);
     border-radius: 20px;
     transition: background 0.5s ease;
-    position: relative;
   }
 
-  .card-icon {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    width: 10%;
-    height: 5%;
+  .card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
   }
 
   .card-button {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
     background: var(--oxford-blue);
     color: var(--light);
     border-radius: 5px;
