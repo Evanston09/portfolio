@@ -1,12 +1,11 @@
 ---
-import { Image } from "astro:assets";
-import github from "@assets/icons/github-white.svg";
+import github from "@assets/icons/github-white.svg?raw";
 ---
 
 <footer class="footer">
   <p>Made by Evan Kim with ❤️ using Astro and three.js</p>
   <a href="https://github.com/Evanston09/portfolio" target="_blank">
-    <Image src={github} alt="github" height={30} />
+    <Fragment set:html={github} />
   </a>
 </footer>
 
@@ -20,5 +19,6 @@ import github from "@assets/icons/github-white.svg";
 
   p {
     color: var(--light);
+    text-align: center;
   }
 </style>
