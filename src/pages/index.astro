@@ -11,15 +11,30 @@ import yag from "@assets/logos/yag.png";
 import flutter from "@assets/icons/flutter-original.svg";
 import laravel from "@assets/icons/laravel-original.svg";
 import rust from "@assets/icons/rust-original.svg";
+import github from "@assets/icons/github-hover.svg?raw";
+import document_icon from "@assets/icons/document.svg?raw";
+import matrix from "@assets/icons/matrix.svg?raw";
 ---
 
 <Layout title="Evan Kim">
   <section class="split full-page">
+    <!-- make this whole hero section a component -->
     <div class="title">
       <h1 class="no-margin">
         Hello World, I am <br class="mobile-break" /><strong>Evan Kim</strong>
       </h1>
       <h2 class="no-margin">Software Developer</h2>
+      <h3 class="no-margin">
+        <a href="https://github.com/Evanston09" target="_blank">
+          <Fragment set:html={github} />
+        </a>
+        <a href="/resume.pdf" target="_blank">
+          <Fragment set:html={document_icon} />
+        </a>
+        <a href="https://matrix.to/#/@evanston:evankim.me" target="_blank">
+          <Fragment set:html={matrix} />
+        </a>
+      </h3>
     </div>
     <BusinessCard height=".8" width=".5" small_height=".5" small_width="1" />
   </section>
@@ -129,7 +144,13 @@ import rust from "@assets/icons/rust-original.svg";
   }
 
   h2 {
+    font-size: 1.75rem;
     color: var(--subheading-1);
-    font-size: 1.5625rem;
+  }
+  a {
+    text-decoration: none;
+  }
+  svg:hover {
+    fill: var(--subheading-1);
   }
 </style>
