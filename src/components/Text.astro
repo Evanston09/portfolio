@@ -9,7 +9,12 @@ const { title, description } = Astro.props;
 
 <style>
   .limited-width {
-    width: 90vw;
+    width: 70vw;
+  }
+  @media (max-width: 768px) {
+    .limited-width {
+      width: 95vw;
+    }
   }
   h1 {
     color: var(--light);
