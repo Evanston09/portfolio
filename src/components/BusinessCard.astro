@@ -3,6 +3,7 @@ const { height, width, small_height, small_width } = Astro.props;
 import front from "../assets/card/front.png";
 import back from "../assets/card/back.png";
 import normal from "../assets/card/normal.jpg";
+import move from "@assets/icons/move.svg?raw";
 ---
 
 <div id="loading-container" class="loading">
@@ -10,26 +11,35 @@ import normal from "../assets/card/normal.jpg";
   <progress id="loading" max="100" value="0">0%</progress>
 </div>
 
-<canvas
-  id="card"
-  data-height={height}
-  data-width={width}
-  data-small_height={small_height}
-  data-small_width={small_width}
-  data-front={front.src}
-  data-back={back.src}
-  data-normal={normal.src}></canvas>
+<div id="canvas-container">
+  <canvas
+    id="card"
+    data-height={height}
+    data-width={width}
+    data-small_height={small_height}
+    data-small_width={small_width}
+    data-front={front.src}
+    data-back={back.src}
+    data-normal={normal.src}
+  >
+  </canvas>
+  <div id="move-icon">
+    <Fragment set:html={move} />
+  </div>
+</div>
 
 <script>
   import * as THREE from "three";
   import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
   const canvas = document.getElementById("card");
+  const canvas_container = document.getElementById("canvas-container");
+  const icon = document.getElementById("move-icon");
   const loading = document.getElementById("loading") as HTMLProgressElement;
   const loadingContainer = document.getElementById("loading-container");
 
   // Used to make sure not null and keep typescript happy
-  if (canvas && loading && loadingContainer) {
+  if (canvas && loading && loadingContainer && canvas_container && icon) {
     // cant pass imports if trying to define vars in script tag meaning i have to use data tags
     // https://stackoverflow.com/questions/76714410/how-to-pass-variable-from-frontmatter-to-script-in-astro-js
     // Alternative?
@@ -61,7 +71,14 @@ import normal from "../assets/card/normal.jpg";
 
     loadingManager.onLoad = () => {
       loadingContainer.style.display = "none";
-      canvas.style.display = "inline";
+      canvas_container.style.display = "block";
+      canvas.addEventListener("mouseover", () => {
+        canvas.style.cursor = "grab";
+      });
+      canvas.addEventListener("mousedown", () => {
+        icon.style.display = "none";
+        canvas.style.cursor = "grabbing";
+      });
     };
 
     const loader = new THREE.TextureLoader(loadingManager);
@@ -229,11 +246,31 @@ import normal from "../assets/card/normal.jpg";
   label {
     color: var(--light);
   }
-  #card {
-    display: none;
-  }
   progress {
     width: 50%;
-    height: 10px;
+    height: 0.625rem;
+  }
+  #canvas-container {
+    display: none;
+    position: relative;
+  }
+  #move-icon {
+    color: lightgray;
+    position: absolute;
+    z-index: 1000;
+    right: 50%;
+    bottom: 30%;
+    opacity: 1;
+    animation: fade 2s linear;
+    animation-iteration-count: infinite;
+  }
+  @keyframes fade {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
   }
 </style>
