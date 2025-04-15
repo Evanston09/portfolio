@@ -79,6 +79,10 @@ import move from "@assets/icons/move.svg?raw";
         icon.style.display = "none";
         canvas.style.cursor = "grabbing";
       });
+
+      canvas.addEventListener("touchstart", () => {
+        icon.style.display = "none";
+      });
     };
 
     const loader = new THREE.TextureLoader(loadingManager);
