@@ -7,10 +7,10 @@ import Footer from "@components/Footer.astro";
 import Contact from "@components/Contact.astro";
 import ztl from "@assets/logos/ztl_logo.png";
 import medminder from "@assets/logos/MedMinder.png";
-import yag from "@assets/logos/yag.png";
+import deca from "@assets/logos/deca.svg";
 import flutter from "@assets/icons/flutter-original.svg";
 import laravel from "@assets/icons/laravel-original.svg";
-import rust from "@assets/icons/rust-original.svg";
+import react from "@assets/icons/react.svg";
 ---
 
 <Layout title="Evan Kim">
@@ -47,11 +47,14 @@ import rust from "@assets/icons/rust-original.svg";
         readMoreText="View Website"
       />
       <ProjectCard
-        title="Yag"
-        description="I developed a custom API to enhance the MedMinder app by processing medication data to offer advanced features such as drug and food interactions, as well as detailed medication descriptions. Built with Axum and Rust."
-        image={yag}
-        alt="Yag"
-        icon={rust}
+        title="DECA Penalty Checker"
+        description="I created a privacy-focused, open-source tool to help DECA competitors identify potential penalty risks in their written events. The web app runs entirely on the user's machine to ensure user privacy. Built with React"
+        image={deca}
+        alt="Paper"
+        icon={react}
+        readMore="true"
+        readMoreURL="https://deca.evankim.me"
+        readMoreText="View Website"
       />
     </div>
   </section>
