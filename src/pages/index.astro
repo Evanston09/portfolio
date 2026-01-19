@@ -8,9 +8,13 @@ import Contact from "@components/Contact.astro";
 import ztl from "@assets/logos/ztl_logo.png";
 import medminder from "@assets/logos/MedMinder.png";
 import deca from "@assets/logos/deca.png";
+import clearskin from "@assets/logos/clearskin_logo.jpg";
+import visiontag from "@assets/logos/visiontag.png";
+import qrious from "@assets/logos/qrious.png";
 import flutter from "@assets/icons/flutter-original.svg";
 import laravel from "@assets/icons/laravel-original.svg";
 import react from "@assets/icons/react.svg";
+import expo from "@assets/icons/expo.svg";
 ---
 
 <Layout title="Evan Kim">
@@ -35,6 +39,7 @@ import react from "@assets/icons/react.svg";
         readMore="true"
         readMoreURL="https://devpost.com/software/medminder-bndvgt"
         readMoreText="Competition Page"
+        award="Finalist - Ready, Set, App Competition"
       />
       <ProjectCard
         title="ZTL ARTCC Website"
@@ -55,6 +60,28 @@ import react from "@assets/icons/react.svg";
         readMore="true"
         readMoreURL="https://deca.evankim.me"
         readMoreText="View Website"
+      />
+      <ProjectCard
+        title="ClearSkin AI"
+        description="An AI-powered mobile app that detects and analyzes acne to help users track their skin health over time. Uses a custom YOLOv8 model for real-time acne detection with Firebase authentication and scan history tracking. Second place winner at the Congressional App Challenge. Built with React Native and Expo."
+        image={clearskin}
+        alt="ClearSkin AI Logo"
+        icon={expo}
+        readMore="true"
+        readMoreURL="https://github.com/Evanston09/dermasnap"
+        readMoreText="View on GitHub"
+        award="2nd Place - Congressional App Challenge"
+      />
+      <ProjectCard
+        title="QRious"
+        description="A malicious QR code scanner that uses virtual machines, screenshot microservices, and AI analysis to detect potentially harmful QR codes before you visit them. Helps protect users from phishing attacks and malicious websites hidden in QR codes. Top 10 finalist in DECA's Innovation Plan competition. Built with Flutter."
+        image={qrious}
+        alt="QRious Logo"
+        icon={flutter}
+        readMore="true"
+        readMoreURL="https://qrious.evankim.me"
+        readMoreText="View Website"
+        award="Top 10 Finalist - DECA Innovation Plan"
       />
     </div>
   </section>

@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { Trophy } from "@lucide/astro";
 
 // Use this differnet prop method later
 const {
@@ -11,13 +12,17 @@ const {
   readMore,
   readMoreURL,
   readMoreText,
+  award,
 } = Astro.props;
 ---
 
 <div class="card">
   <Image src={image} alt={alt} class="card-image" />
   <div class="card-content">
-    <h1>{title}</h1>
+    <div class="title-container">
+      <h1>{title}</h1>
+      {award && <Trophy class="award-icon" title={award} size={24} />}
+    </div>
     <p>{description}</p>
   </div>
 
@@ -47,8 +52,14 @@ const {
     padding: 0 15px;
   }
 
-  .card:hover {
-    background: var(--midnight-blue-hover);
+  .title-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .award-icon {
+    color: var(--pacific-cyan);
   }
 
   .card {

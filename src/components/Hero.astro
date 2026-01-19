@@ -11,7 +11,7 @@ import matrix from "@assets/icons/matrix.svg?raw";
       Hello World, I am <br /><strong>Evan Kim</strong>
     </h1>
     <h2 class="no-margin">Software Developer</h2>
-    <h3 class="no-margin">
+    <h3 class="no-margin social-icons">
       <a href="https://github.com/Evanston09" target="_blank">
         <Fragment set:html={github} />
       </a>
@@ -47,8 +47,8 @@ import matrix from "@assets/icons/matrix.svg?raw";
   a {
     text-decoration: none;
   }
-  svg:hover {
-    fill: var(--subheading-1);
+  .social-icons :global(svg:hover) {
+    fill: var(--light);
   }
   .split {
     display: flex;
