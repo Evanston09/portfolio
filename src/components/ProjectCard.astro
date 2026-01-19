@@ -21,7 +21,9 @@ const {
   <div class="card-content">
     <div class="title-container">
       <h1>{title}</h1>
-      {award && <Trophy class="award-icon" title={award} size={24} />}
+        <span title={award}>
+            <Trophy class="award-icon" size={24} />
+        </span>
     </div>
     <p>{description}</p>
   </div>
