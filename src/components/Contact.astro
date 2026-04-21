@@ -1,6 +1,5 @@
 ---
 import peaks from "@assets/peaks.svg";
-const { matrix } = Astro.props;
 ---
 
 <div class="contact">
@@ -17,11 +16,6 @@ const { matrix } = Astro.props;
         <textarea name="message" id="message" rows="15" required></textarea>
         <button type="submit">Send</button>
       </form>
-      <p id="matrix" class="ps">
-        P.S. For privacy, you can find me on <a href={matrix} target="_blank"
-          >Matrix</a
-        >.
-      </p>
       <div id="success" class="success">
         <h2>Thank You!</h2>
         <p>
@@ -36,9 +30,6 @@ const { matrix } = Astro.props;
 </div>
 
 <style define:vars={{ peaks: `url(${peaks.src})` }}>
-  .ps {
-    font-size: 0.9rem;
-  }
   .success {
     display: none;
   }
@@ -142,20 +133,17 @@ const { matrix } = Astro.props;
     background: var(--midnight-blue);
   }
 </style>
-<script>
+  <script>
   const form = document.querySelector("form");
-  const matrix = document.getElementById("matrix");
   const success = document.getElementById("success");
   const now = document.getElementById("quick");
-  if (form && success && now && matrix) {
+  if (form && success && now) {
     function hideSuccess() {
       form!.style.display = "block";
-      matrix!.style.display = "block";
       success!.style.display = "none";
     }
     function showSuccess() {
       form!.style.display = "none";
-      matrix!.style.display = "none";
       success!.style.display = "block";
     }
     const handleSubmit = (event: Event) => {
