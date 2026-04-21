@@ -9,13 +9,17 @@ import ztl from "@assets/logos/ztl_logo.png";
 import medminder from "@assets/logos/MedMinder.png";
 import deca from "@assets/logos/deca.png";
 import clearskin from "@assets/logos/clearskin_logo.jpg";
+import forks from "@assets/logos/forks.svg";
 import qrious from "@assets/logos/qrious.png";
 import aperture from "@assets/logos/aperture.png";
+import okeanos from "@assets/logos/okeanos.jpg";
+import kraken from "@assets/logos/kraken.png";
 import flutter from "@assets/icons/flutter-original.svg";
 import kotlin from "@assets/icons/kotlin.svg";
 import laravel from "@assets/icons/laravel-original.svg";
 import react from "@assets/icons/react.svg";
 import expo from "@assets/icons/expo.svg";
+import ros from "@assets/icons/ros.svg";
 ---
 
 <Layout title="Evan Kim">
@@ -32,46 +36,45 @@ import expo from "@assets/icons/expo.svg";
     <h1>My Projects</h1>
     <div class="grid-container">
       <ProjectCard
-        title="MedMinder"
-        description="To combat medication non-compliance, I was the lead developer of a team of 5 that built an app that uses Optical Character Recognition (OCR) technology to create an algorithm to interpret prescription directions and schedule notifications to remind you when to take medications and more. Finalist of the 5th annual Ready, Set, App competition which was sponsored by the NCBCE and Lenovo. Built with Flutter."
-        image={medminder}
-        alt="MedMinder"
-        icon={flutter}
-        readMore="true"
-        readMoreURL="https://devpost.com/software/medminder-bndvgt"
-        readMoreText="Competition Page"
-        award="Finalist - Ready, Set, App Competition"
-      />
-      <ProjectCard
-        title="ZTL ARTCC Website"
-        description="I am part of the web team for an open-source website that supports the Atlanta ARTCC (Air Route Traffic Control Center) of VATUSA on the VATSIM (Virtual Air Traffic Simulation Network) platform. Built with Laravel."
-        image={ztl}
-        alt="ZTL Logo"
-        icon={laravel}
-        readMore="true"
-        readMoreURL="https://www.ztlartcc.org/"
-        readMoreText="View Website"
-      />
-      <ProjectCard
-        title="DECA Penalty Checker"
-        description="I created a privacy-focused, open-source tool to help DECA competitors identify potential penalty risks in their written events. The web app runs entirely on the user's machine to ensure user privacy. Built with React"
-        image={deca}
-        alt="Paper"
+        title="Okeanos"
+        description="Built the frontend and YOLO object detection pipeline for a crowdsourced ocean pollution mapping platform that helps cleanup organizations locate ocean trash in real time. Verified its effectiveness using HoloOcean simulation. Won the Ingenuity Grand Award at SMathHacks 2026. Built with React, TypeScript, C++, and Python."
+        image={okeanos}
+        alt="Okeanos logo"
         icon={react}
         readMore="true"
-        readMoreURL="https://deca.evankim.me"
+        readMoreURL="https://devpost.com/software/okeanos"
+        readMoreText="Competition Page"
+        award="Ingenuity Grand Award - SMathHacks 2026"
+      />
+      <ProjectCard
+        title="MATE Leviathan"
+        description="I program for MATE Leviathan, a Ranger-class underwater robotics team, using ROS, Python, and C++. Separately, I work on Kraken, a research ROV exploring how to map Lake James. I also build deep HoloOcean simulations, including recreating our local pool in HoloOcean for accurate driver practice."
+        image={kraken}
+        alt="MATE Leviathan logo"
+        icon={ros}
+        readMore="true"
+        readMoreURL="https://github.com/MATE-Leviathan"
+        readMoreText="View on GitHub"
+      />
+      <ProjectCard
+        title="Forks"
+        description="I built and manage a consolidated website for NCSSM Forks, a live elimination game where players inherit targets by recording verified shoulder-tap kills and can defend themselves by touching their fork to their nose. The site handles player tracking, email workflows, and kill verification in one place. Built with React, Inertia, Laravel, and Three.js."
+        image={forks}
+        alt="Forks logo"
+        icon={react}
+        readMore="true"
+        readMoreURL="https://ncssmforks.com"
         readMoreText="View Website"
       />
       <ProjectCard
-        title="ClearSkin AI"
-        description="An AI-powered mobile app that detects and analyzes acne to help users track their skin health over time. Uses a custom YOLOv8 model for real-time acne detection with Firebase authentication and scan history tracking. Second place winner at the Congressional App Challenge. Built with React Native and Expo."
-        image={clearskin}
-        alt="ClearSkin AI Logo"
-        icon={expo}
+        title="FTC Aperture Science #5064"
+        description="Lead programmer for FIRST Tech Challenge Team 5064 Aperture Science, a competitive robotics team. I developed the robot's control system using a command-based architecture in Kotlin, implementing autonomous path planning and modular subsystems for competition tasks. I also actively maintain the team's website."
+        image={aperture}
+        alt="Aperture Science Logo"
+        icon={kotlin}
         readMore="true"
-        readMoreURL="https://github.com/Evanston09/dermasnap"
-        readMoreText="View on GitHub"
-        award="2nd Place - Congressional App Challenge"
+        readMoreURL="https://apertureftc.org"
+        readMoreText="View Website"
       />
       <ProjectCard
         title="QRious"
@@ -85,14 +88,46 @@ import expo from "@assets/icons/expo.svg";
         award="Top 10 Finalist - DECA Innovation Plan"
       />
       <ProjectCard
-        title="FTC Aperture Science #5064"
-        description="Lead programmer for FIRST Tech Challenge Team 5064 Aperture Science, a competitive robotics team. I developed the robot's control system using a command-based architecture in Kotlin, implementing autonomous path planning and modular subsystems for competition tasks. I also actively maintain the team's website."
-        image={aperture}
-        alt="Aperture Science Logo"
-        icon={kotlin}
+        title="ClearSkin AI"
+        description="An AI-powered mobile app that detects and analyzes acne to help users track their skin health over time. Uses a custom YOLOv8 model for real-time acne detection with Firebase authentication and scan history tracking. Second place winner at the Congressional App Challenge. Built with React Native and Expo."
+        image={clearskin}
+        alt="ClearSkin AI Logo"
+        icon={expo}
         readMore="true"
-        readMoreURL="https://apertureftc.org"
+        readMoreURL="https://github.com/Evanston09/dermasnap"
+        readMoreText="View on GitHub"
+        award="2nd Place - Congressional App Challenge"
+      />
+      <ProjectCard
+        title="DECA Penalty Checker"
+        description="I created a privacy-focused, open-source tool to help DECA competitors identify potential penalty risks in their written events. The web app runs entirely on the user's machine to ensure user privacy. Built with React"
+        image={deca}
+        alt="Paper"
+        icon={react}
+        readMore="true"
+        readMoreURL="https://deca.evankim.me"
         readMoreText="View Website"
+      />
+      <ProjectCard
+        title="ZTL ARTCC Website"
+        description="I am part of the web team for an open-source website that supports the Atlanta ARTCC (Air Route Traffic Control Center) of VATUSA on the VATSIM (Virtual Air Traffic Simulation Network) platform. Built with Laravel."
+        image={ztl}
+        alt="ZTL Logo"
+        icon={laravel}
+        readMore="true"
+        readMoreURL="https://www.ztlartcc.org/"
+        readMoreText="View Website"
+      />
+      <ProjectCard
+        title="MedMinder"
+        description="To combat medication non-compliance, I was the lead developer of a team of 5 that built an app that uses Optical Character Recognition (OCR) technology to create an algorithm to interpret prescription directions and schedule notifications to remind you when to take medications and more. Finalist of the 5th annual Ready, Set, App competition which was sponsored by the NCBCE and Lenovo. Built with Flutter."
+        image={medminder}
+        alt="MedMinder"
+        icon={flutter}
+        readMore="true"
+        readMoreURL="https://devpost.com/software/medminder-bndvgt"
+        readMoreText="Competition Page"
+        award="Finalist - Ready, Set, App Competition"
       />
     </div>
   </section>
